@@ -18,6 +18,11 @@ given in the comments.
 // paragraph with an id of "p1" to:
 // "Hello World! I'm listening to events."
 
+const button1 = document.getElementById("button1");
+button1.addEventListener("click", (event) => {
+  document.getElementById("p1").textContent = 
+  "Hello World! I'm listening to events."
+}, false);
 
 // 2) Add an event listener to the button with an id
 // of "button2". Listen for the click event. The
@@ -30,6 +35,15 @@ given in the comments.
 // The button should switch the text back
 // and forth, so 3rd and 4th clicks will
 // do the same, etc.
+
+const button2 = document.getElementById("button2")
+button2.addEventListener("click", (event) => {
+  const p2 = document.getElementById("p2");
+  p2.textContent = 
+    p2.textContent === "Paragraph Two." 
+    ? "This button toggles text content." 
+    : "Paragraph Two.";
+});
 
 
 /////////////////////
@@ -47,6 +61,15 @@ given in the comments.
 // HINT: You should look at the HTML carefully to
 // make your selectors.
 
+const button3 = document.querySelector(
+  "#myPage > .buttons-container > button:nth-child(3)"
+);
+button3.addEventListener("click", (event) => {
+  const p3 = document.querySelector(
+    "#myPage > .para-container > p:nth-child(3)"
+  );
+  p3.textContent = "Third button clicked.";
+});
 
 // 4) In the "myPage" section, select the fourth
 // button and assign a "click" listener. When
@@ -54,12 +77,30 @@ given in the comments.
 // "fourthPara" to the fourth paragraph
 // in the "myPage" section.
 
+const button4 = document.querySelector(
+  "#myPage > .buttons-container > button:nth-child(4)"
+);
+button4.addEventListener("click", (event) => {
+  const p4 = document.querySelector(
+    "#myPage > .para-container > p:nth-child(4)"
+  );
+  p4.classList.add("fourthPara");
+});
 
 // 5) In the "myPage" section, select the fifth
 // button and assign a "click" listener. When
 // clicked, it should toggle the class named
 // "fourthPara" for the fifth paragraph
 // in the "myPage" section.
+const button5 = document.querySelector(
+  "#myPage > .buttons-container > button:nth-child(5)"
+);
+button5.addEventListener("click", (event) => {
+  const p5 = document.querySelector(
+    "#myPage > .para-container > p:nth-child(5)"
+  );
+  p5.classList.toggle("fourthPara");
+});
 
 // 6) In the "myPage" section, select the sixth
 // button and assign a "click" listener. When
@@ -71,6 +112,16 @@ given in the comments.
 // Event Bubbling. You should stop the
 // event propagation.
 
+const button6 = document.querySelector(
+  "#myPage > .buttons-container > button:nth-child(6)"
+);
+button6.addEventListener("click", (event) => {
+  event.stopPropagation();
+  const p6 = document.querySelector(
+    "#myPage > .para-container > p:nth-child(6)"
+  );
+  p6.textContent = "Event Bubbling. Stopping propagation.";
+});
 
 // 7) Provide a function named "addToSessionStorage"
 // that accepts two parameters:
@@ -85,6 +136,9 @@ given in the comments.
 // Hint: Use JSON methods on these storage problems.
 /////
 
+function addToSessionStorage(storeName, objName) {
+  sessionStorage.setItem(storeName, JSON.stringify(objName));
+};
 
 // 8) Provide a function named getFromSessionStorage
 // that will retrieve the object you put in
@@ -92,8 +146,16 @@ given in the comments.
 // Your function should accept a "storeName"
 // parameter and return the object it retrieves.
 
+function getFromSessionStorage(storeName) {
+  const myObject = JSON.parse(sessionStorage.getItem(storeName));
+  return myObject;
+};
 
 // 9) Provide a function emptyWebStorage
 // that will remove all entries from local
 // storage and session storage.
 
+function emptyWebStorage() {
+  localStorage.clear();
+  sessionStorage.clear();
+}
